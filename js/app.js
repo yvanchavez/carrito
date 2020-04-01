@@ -54,6 +54,8 @@ function insertarCarrito(curso){
         </td>
         `
         listaCursos.appendChild(row)
+
+        guardarCursoLocalStorage(curso)
 }
 
 function eliminarCurso(e){
@@ -69,4 +71,29 @@ function vaciarCarrito(){
         listaCursos.removeChild(listaCursos.firstChild)
     }
     return false
+}
+
+function guardarCursoLocalStorage(curso){
+    let cursos;
+
+    cursos = obtenerCursosLocalStorage()
+
+    cursos.push(curso)
+
+    localStorage.setItem('cursos',JSON.stringify(cursos))
+}
+
+//comprobar que haya elementos en el local storage, retorna un arreglo
+function obtenerCursosLocalStorage(){
+    let cursosLS
+
+    if(localStorage.getItem('cursos')===null){
+        cursosLS = []
+
+
+    }else{
+        cursosLS = JSON.parse(localStorage.getItem('cursos'))
+    }
+    console.log(cursosLS)
+    return cursosLS
 }
